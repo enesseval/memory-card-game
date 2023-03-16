@@ -13,15 +13,14 @@ function karistir(dizi) {
 
 function CardList() {
 	const cards = useSelector((state) => state.card.items);
+	const gameStatus = useSelector((state) => state.card.gameStatus);
 
 	let arr = karistir(cards.concat(cards));
 
-	console.log(arr);
 	return (
 		<div className="cardList">
-			{arr.map((card) => (
-				<Card card={card} key={(card.id + 1) * Math.random() * 1} />
-			))}
+			{gameStatus === "end" && <div>game finish</div>}
+			{gameStatus === "continue" && arr.map((card, key) => <Card card={card} key={key} />)}
 		</div>
 	);
 }

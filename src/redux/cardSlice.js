@@ -14,14 +14,15 @@ import lucian from "../pictures/lucian.jpg";
 import missfortune from "../pictures/missfortune.jpg";
 import samira from "../pictures/samira.jpg";
 import senna from "../pictures/senna.jpg";
-import back from "../pictures/back.png";
 
 export const cardSlice = createSlice({
 	name: "cards",
 	initialState: {
-		backImage: back,
 		firstChoice: "",
 		secondChoice: "",
+		gameStatus: "continue",
+		count: 0,
+		point: 50,
 		items: [
 			{
 				id: 0,
@@ -33,71 +34,71 @@ export const cardSlice = createSlice({
 				img: aphelios,
 				name: "aphelios",
 			},
-			{
-				id: 2,
-				img: ashe,
-				name: "ashe",
-			},
-			{
-				id: 3,
-				img: caitlyn,
-				name: "caitlyn",
-			},
-			{
-				id: 4,
-				img: draven,
-				name: "draven",
-			},
-			{
-				id: 5,
-				img: ezreal,
-				name: "ezreal",
-			},
-			{
-				id: 6,
-				img: jhin,
-				name: "jhin",
-			},
-			{
-				id: 7,
-				img: jinx,
-				name: "jinx",
-			},
-			{
-				id: 8,
-				img: kaisa,
-				name: "kaisa",
-			},
-			{
-				id: 9,
-				img: kalista,
-				name: "kalista",
-			},
-			{
-				id: 10,
-				img: kogmaw,
-				name: "kogmaw",
-			},
-			{
-				id: 11,
-				img: lucian,
-				name: "lucian",
-			},
-			{
-				id: 12,
-				img: missfortune,
-				name: "missfortune",
-			},
-			{
-				id: 13,
-				img: samira,
-				name: "samira",
-			},
-			{
-				id: 14,
-				img: senna,
-				name: "senna",
-			},
+			// {
+			// 	id: 2,
+			// 	img: ashe,
+			// 	name: "ashe",
+			// },
+			// {
+			// 	id: 3,
+			// 	img: caitlyn,
+			// 	name: "caitlyn",
+			// },
+			// {
+			// 	id: 4,
+			// 	img: draven,
+			// 	name: "draven",
+			// },
+			// {
+			// 	id: 5,
+			// 	img: ezreal,
+			// 	name: "ezreal",
+			// },
+			// {
+			// 	id: 6,
+			// 	img: jhin,
+			// 	name: "jhin",
+			// },
+			// {
+			// 	id: 7,
+			// 	img: jinx,
+			// 	name: "jinx",
+			// },
+			// {
+			// 	id: 8,
+			// 	img: kaisa,
+			// 	name: "kaisa",
+			// },
+			// {
+			// 	id: 9,
+			// 	img: kalista,
+			// 	name: "kalista",
+			// },
+			// {
+			// 	id: 10,
+			// 	img: kogmaw,
+			// 	name: "kogmaw",
+			// },
+			// {
+			// 	id: 11,
+			// 	img: lucian,
+			// 	name: "lucian",
+			// },
+			// {
+			// 	id: 12,
+			// 	img: missfortune,
+			// 	name: "missfortune",
+			// },
+			// {
+			// 	id: 13,
+			// 	img: samira,
+			// 	name: "samira",
+			// },
+			// {
+			// 	id: 14,
+			// 	img: senna,
+			// 	name: "senna",
+			// },
 		],
 	},
 	reducers: {
@@ -107,8 +108,18 @@ export const cardSlice = createSlice({
 		setSecondChoice: (state, action) => {
 			state.secondChoice = action.payload;
 		},
+		setCount: (state) => {
+			state.count += 1;
+		},
+		setPoint: (state, action) => {
+			if (action.payload === "true") state.point += 10;
+			else state.point -= 10;
+		},
+		gameStatus: (state, action) => {
+			state.gameStatus = action.payload;
+		},
 	},
 });
 
-export const { setFirstChoice, setSecondChoice } = cardSlice.actions;
+export const { setFirstChoice, setSecondChoice, gameStatus, setCount, setPoint } = cardSlice.actions;
 export default cardSlice.reducer;

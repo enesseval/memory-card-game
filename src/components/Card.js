@@ -1,26 +1,52 @@
-import { nanoid } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { setFirstChoice, setSecondChoice } from "../redux/cardSlice";
+import { gameStatus, setCount, setFirstChoice, setPoint, setSecondChoice } from "../redux/cardSlice";
 
 function Card({ card }) {
-	const cardId = nanoid();
+	const first = useSelector((state) => state.card.firstChoice);
+	const second = useSelector((state) => state.card.secondChoice);
 
 	const dispatch = useDispatch();
-	const firstChoice = useSelector((state) => state.card.firstChoice);
-	const secondChoice = useSelector((state) => state.card.secondChoice);
+
+	if (document.querySelectorAll(".trueChoice").length === 4) {
+		dispatch(gameStatus("end"));
+	}
+	if (first !== "" && second !== "") {
+		dispatch(setCount());
+		if (first === second) {
+			dispatch(setFirstChoice(""));
+			dispatch(setSecondChoice(""));
+			dispatch(setPoint("true"));
+			document.querySelectorAll(".clickEvent").forEach((item) => {
+				item.classList.remove("clickEvent");
+				item.classList.add("trueChoice");
+			});
+		}
+		if (first !== second && second !== "") {
+			dispatch(setFirstChoice(""));
+			dispatch(setSecondChoice(""));
+			dispatch(setPoint("false"));
+			setTimeout(() => {
+				document.querySelectorAll(".clickEvent").forEach((item) => {
+					item.classList.remove("clickEvent");
+				});
+			}, 1000);
+		}
+	}
 
 	const clickHandle = (e) => {
-		document.getElementById(e.target.id).classList.add("clickEvent");
-		if (firstChoice === "") {
-			dispatch(setFirstChoice(e.target.attributes.name.nodeValue));
+		if (first === "") {
+			dispatch(setFirstChoice(e.target.innerHTML));
+			e.target.parentElement.classList.add("clickEvent");
 		} else {
-			dispatch(setSecondChoice(e.target.attributes.name.nodeValue));
+			dispatch(setSecondChoice(e.target.innerHTML));
+			e.target.parentElement.classList.add("clickEvent");
 		}
 	};
+
 	return (
-		<div className="cards" id={cardId} name={card.name} onClick={(e) => clickHandle(e)}>
-			<div className="card back" id={cardId} name={card.name}>
-				MEMORY CARD GAME
+		<div className="cards" name={card.name} onClick={(e) => clickHandle(e)}>
+			<div className="card back" name={card.name}>
+				{card.name}
 			</div>
 			<div className="card front">
 				<img src={card.img} alt={card.name} />
