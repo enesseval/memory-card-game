@@ -34,71 +34,71 @@ export const cardSlice = createSlice({
 				img: aphelios,
 				name: "aphelios",
 			},
-			// {
-			// 	id: 2,
-			// 	img: ashe,
-			// 	name: "ashe",
-			// },
-			// {
-			// 	id: 3,
-			// 	img: caitlyn,
-			// 	name: "caitlyn",
-			// },
-			// {
-			// 	id: 4,
-			// 	img: draven,
-			// 	name: "draven",
-			// },
-			// {
-			// 	id: 5,
-			// 	img: ezreal,
-			// 	name: "ezreal",
-			// },
-			// {
-			// 	id: 6,
-			// 	img: jhin,
-			// 	name: "jhin",
-			// },
-			// {
-			// 	id: 7,
-			// 	img: jinx,
-			// 	name: "jinx",
-			// },
-			// {
-			// 	id: 8,
-			// 	img: kaisa,
-			// 	name: "kaisa",
-			// },
-			// {
-			// 	id: 9,
-			// 	img: kalista,
-			// 	name: "kalista",
-			// },
-			// {
-			// 	id: 10,
-			// 	img: kogmaw,
-			// 	name: "kogmaw",
-			// },
-			// {
-			// 	id: 11,
-			// 	img: lucian,
-			// 	name: "lucian",
-			// },
-			// {
-			// 	id: 12,
-			// 	img: missfortune,
-			// 	name: "missfortune",
-			// },
-			// {
-			// 	id: 13,
-			// 	img: samira,
-			// 	name: "samira",
-			// },
-			// {
-			// 	id: 14,
-			// 	img: senna,
-			// 	name: "senna",
-			// },
+			{
+				id: 2,
+				img: ashe,
+				name: "ashe",
+			},
+			{
+				id: 3,
+				img: caitlyn,
+				name: "caitlyn",
+			},
+			{
+				id: 4,
+				img: draven,
+				name: "draven",
+			},
+			{
+				id: 5,
+				img: ezreal,
+				name: "ezreal",
+			},
+			{
+				id: 6,
+				img: jhin,
+				name: "jhin",
+			},
+			{
+				id: 7,
+				img: jinx,
+				name: "jinx",
+			},
+			{
+				id: 8,
+				img: kaisa,
+				name: "kaisa",
+			},
+			{
+				id: 9,
+				img: kalista,
+				name: "kalista",
+			},
+			{
+				id: 10,
+				img: kogmaw,
+				name: "kogmaw",
+			},
+			{
+				id: 11,
+				img: lucian,
+				name: "lucian",
+			},
+			{
+				id: 12,
+				img: missfortune,
+				name: "missfortune",
+			},
+			{
+				id: 13,
+				img: samira,
+				name: "samira",
+			},
+			{
+				id: 14,
+				img: senna,
+				name: "senna",
+			},
 		],
 	},
 	reducers: {
@@ -114,6 +114,7 @@ export const cardSlice = createSlice({
 		setPoint: (state, action) => {
 			if (action.payload === "true") state.point += 10;
 			else state.point -= 10;
+			console.log("awfsa");
 		},
 		gameStatus: (state, action) => {
 			state.gameStatus = action.payload;

@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { gameStatus, setCount, setFirstChoice, setPoint, setSecondChoice } from "../redux/cardSlice";
+import { gameStatus, setFirstChoice, setSecondChoice } from "../redux/cardSlice";
 
 function Card({ card }) {
 	const first = useSelector((state) => state.card.firstChoice);
@@ -7,31 +8,30 @@ function Card({ card }) {
 
 	const dispatch = useDispatch();
 
-	if (document.querySelectorAll(".trueChoice").length === 4) {
-		dispatch(gameStatus("end"));
-	}
-	if (first !== "" && second !== "") {
-		dispatch(setCount());
-		if (first === second) {
-			dispatch(setFirstChoice(""));
-			dispatch(setSecondChoice(""));
-			dispatch(setPoint("true"));
-			document.querySelectorAll(".clickEvent").forEach((item) => {
-				item.classList.remove("clickEvent");
-				item.classList.add("trueChoice");
-			});
+	useEffect(() => {
+		if (document.querySelectorAll(".trueChoice").length === 0) {
+			dispatch(gameStatus("end"));
 		}
-		if (first !== second && second !== "") {
-			dispatch(setFirstChoice(""));
-			dispatch(setSecondChoice(""));
-			dispatch(setPoint("false"));
-			setTimeout(() => {
+		if (first !== "" && second !== "") {
+			if (first === second) {
+				dispatch(setFirstChoice(""));
+				dispatch(setSecondChoice(""));
 				document.querySelectorAll(".clickEvent").forEach((item) => {
 					item.classList.remove("clickEvent");
+					item.classList.add("trueChoice");
 				});
-			}, 1000);
+			}
+			if (first !== second && second !== "") {
+				dispatch(setFirstChoice(""));
+				dispatch(setSecondChoice(""));
+				setTimeout(() => {
+					document.querySelectorAll(".clickEvent").forEach((item) => {
+						item.classList.remove("clickEvent");
+					});
+				}, 1000);
+			}
 		}
-	}
+	}, [first, second, dispatch]);
 
 	const clickHandle = (e) => {
 		if (first === "") {

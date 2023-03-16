@@ -14,15 +14,35 @@ function karistir(dizi) {
 function CardList() {
 	const cards = useSelector((state) => state.card.items);
 	const gameStatus = useSelector((state) => state.card.gameStatus);
+    const point = useSelector((state) => state.card.point);
 
-	let arr = karistir(cards.concat(cards));
+    let arr = karistir(cards.concat(cards));
 
-	return (
+    const handleButton = (stat) => {
+		console.log(stat);
+    };
+
+    return (
 		<div className="cardList">
-			{gameStatus === "end" && <div>game finish</div>}
+			{gameStatus === "end" &&
+				(point > 0 ? (
+					<div className="gameEnd">
+						<h1 className="vic">VİCTORY</h1>
+						<button onClick={() => handleButton("victory")} className="vicBut">
+							Play Again
+						</button>
+					</div>
+				) : (
+					<div className="gameEnd">
+						<h1 className="lose">GAME OVER</h1>
+						<button onClick={() => handleButton("lose")} className="loseBut">
+							Try Again
+						</button>
+					</div>
+				))}
 			{gameStatus === "continue" && arr.map((card, key) => <Card card={card} key={key} />)}
 		</div>
-	);
+    );
 }
 
 export default CardList;
