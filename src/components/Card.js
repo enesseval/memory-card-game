@@ -9,8 +9,10 @@ function Card({ card }) {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (document.querySelectorAll(".trueChoice").length === 0) {
-			dispatch(gameStatus("end"));
+		if (document.querySelectorAll(".trueChoice").length === 30) {
+			setTimeout(() => {
+				dispatch(gameStatus("end"));
+			}, 1000);
 		}
 		if (first !== "" && second !== "") {
 			if (first === second) {
@@ -35,18 +37,18 @@ function Card({ card }) {
 
 	const clickHandle = (e) => {
 		if (first === "") {
-			dispatch(setFirstChoice(e.target.innerHTML));
+			dispatch(setFirstChoice(e.target.attributes.name.nodeValue));
 			e.target.parentElement.classList.add("clickEvent");
 		} else {
-			dispatch(setSecondChoice(e.target.innerHTML));
+			dispatch(setSecondChoice(e.target.attributes.name.nodeValue));
 			e.target.parentElement.classList.add("clickEvent");
 		}
 	};
 
 	return (
-		<div className="cards" name={card.name} onClick={(e) => clickHandle(e)}>
+		<div className="cards" onClick={(e) => clickHandle(e)}>
 			<div className="card back" name={card.name}>
-				{card.name}
+				MEMORY CARD GAME
 			</div>
 			<div className="card front">
 				<img src={card.img} alt={card.name} />

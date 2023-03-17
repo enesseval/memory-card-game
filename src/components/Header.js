@@ -23,9 +23,20 @@ function Header() {
 
 	return (
 		<div className="header">
-			<h1>Memory Card Game</h1>
-			<p>Your Score: {point}</p>
-			<p>Count: {count}</p>
+			<p>Memory Card Game</p>
+			<div className="headerBottom">
+				<div>
+					<p>
+						Notes: <br /> Start game 200 points <br /> If your choise is correct you will get 50 points <br /> If your choise is wrong you will lose 10 points
+					</p>
+				</div>
+				<div>
+					<p>
+						Your Score: {point} <br />
+						Count: {count}
+					</p>
+				</div>
+			</div>
 		</div>
 	);
 }
